@@ -60,8 +60,9 @@ startButton.addEventListener("click",function(){
     else{
         if(remainingTime===0){
         remainingTime=Number(hoursInput.value||0)*3600+Number(minutesInput.value||0)*60+Number(secondsInput.value||0);
-        endTime = Date.now() + remainingTime * 1000;
+        
         }
+        endTime = Date.now() + remainingTime * 1000;
         timeText.textContent=formatTime(remainingTime);
         timerId=setInterval(()=>{
             remainingTime = Math.max(
