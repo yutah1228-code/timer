@@ -23,15 +23,25 @@ function formatTime(totalSeconds){
 }
 
 function notifyTimerEnd() {
+  if (!("Notification" in window)) {
+    alert("このブラウザは通知に対応していません");
+    return;
+  }
+
   if (Notification.permission === "granted") {
     new Notification("タイマー終了", {
       body: "設定した時間になりました"
     });
+  } else {
+    alert("通知が許可されていません");
   }
 }
 
 startButton.addEventListener("click",function(){
     console.log("スタートボタンが押されました");
+    if (Notification.permission === "default") {
+        Notification.requestPermission();
+    }
     
 
     if (timerId !== null) {
@@ -72,9 +82,7 @@ startButton.addEventListener("click",function(){
 
     }
 
-    if (Notification.permission === "default") {
-        Notification.requestPermission();
-    }
+    
     
 });
 stopButton.addEventListener("click",function(){
